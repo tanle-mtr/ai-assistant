@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 对话助手</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- 侧边栏 -->
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h2>AI 助手</h2>
+      </div>
+      <button class="new-chat-btn" id="newChatBtn">+ 新建对话</button>
+      <div class="chat-list" id="chatList">
+        <!-- 对话列表将动态生成 -->
+      </div>
+      <div class="sidebar-footer">
+        <button class="settings-btn" id="settingsBtn">⚙️ 设置</button>
+      </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main id="mainContent" class="main-content">
+      <!-- 欢迎页面 -->
+      <div id="welcomePage" class="welcome-page">
+        <h1>🤖 AI 对话助手</h1>
+        <p>支持文本对话、图片生成、视频生成和图像识别</p>
+        <button class="start-btn" id="startChatBtn">开始对话</button>
+      </div>
+
+      <!-- 聊天界面 -->
+      <div id="chatPage" class="chat-page hidden">
+        <div class="chat-header">
+          <h3 id="chatTitle">新对话</h3>
+          <select id="modelSelect" class="model-select">
+            <option value="">选择模型...</option>
+          </select>
+        </div>
+        <div class="messages-container" id="messagesContainer">
+          <!-- 消息将动态添加 -->
+        </div>
+        <div class="input-area">
+          <div class="input-tools">
+            <button class="tool-btn" id="imageUploadBtn" title="上传图片">🖼️</button>
+            <button class="tool-btn" id="voiceInputBtn" title="语音输入">🎤</button>
+            <input type="file" id="imageInput" accept="image/*" class="hidden-input">
+          </div>
+          <div class="input-wrapper">
+            <textarea id="messageInput" placeholder="输入消息..." rows="1"></textarea>
+            <button class="send-btn" id="sendBtn">➤</button>
+          </div>
+          <div class="input-footer">
+            <span id="charCount">0 字符</span>
+            <div class="quick-actions">
+              <button class="quick-btn" data-action="image">🎨 生图</button>
+              <button class="quick-btn" data-action="video">🎬 视频</button>
+              <button class="quick-btn" data-action="vision">👁️ 识图</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 设置面板 -->
+      <div id="settingsPage" class="settings-page hidden">
+        <div class="settings-header">
+          <h3>API 设置</h3>
+          <button class="close-btn" id="closeSettingsBtn">×</button>
+        </div>
+        <div class="settings-content">
+          <div class="setting-group">
+            <h4>OpenAI 兼容接口</h4>
+            <div class="form-group">
+              <label>API Key</label>
+              <input type="password" id="apiKeyInput" placeholder="sk-...">
+            </div>
+            <div class="form-group">
+              <label>Base URL</label>
+              <input type="text" id="baseUrlInput" placeholder="https://api.openai.com/v1">
+            </div>
+            <button class="discover-btn" id="discoverModelsBtn">🔍 发现模型</button>
+            <div id="discoveryStatus" class="discovery-status"></div>
+          </div>
+
+          <div class="setting-group">
+            <h4>常用 API 模板</h4>
+            <div class="template-list">
+              <button class="template-btn" data-url="https://api.openai.com/v1" data-key="OPENAI">OpenAI</button>
+              <button class="template-btn" data-url="https://api.deepseek.com" data-key="DEEPSEEK">DeepSeek</button>
+              <button class="template-btn" data-url="https://api.moonshot.cn/v1" data-key="MOONSHOT">Moonshot</button>
+              <button class="template-btn" data-url="https://api.zhipuai.cn/api" data-key="ZHIPU">智谱AI</button>
+              <button class="template-btn" data-url="https://dashscope.aliyuncs.com/compatible-mode/v1" data-key="ALIBABA">阿里云</button>
+            </div>
+          </div>
+
+          <div class="setting-group">
+            <h4>已保存的 Key</h4>
+            <div id="savedKeysList" class="saved-keys-list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 加载遮罩 -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+      <div class="loading-spinner"></div>
+      <p>正在生成中...</p>
+    </div>
+
+    <!-- 图片预览模态框 -->
+    <div id="imageModal" class="modal hidden">
+      <div class="modal-content">
+        <img id="modalImage" src="" alt="预览">
+        <button class="modal-close" id="modalCloseBtn">×</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
