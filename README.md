@@ -1,4 +1,4 @@
-# 🤖 AI 对话助手
+﻿# AI 对话助手
 
 一个支持 OpenAI 兼容接口的 AI 对话应用，支持文本对话、图片生成、视频生成和图像识别功能。
 
@@ -62,7 +62,8 @@ AI-app/
 ├── .github/workflows/       # GitHub Actions 工作流
 │   └── build.yml           # 自动构建配置
 ├── android/                 # Android 项目
-├── www/                     # Web 应用资源
+│   ├── app/src/main/assets/www/  # Web 应用资源
+│   └── ...
 ├── AI助手.apk              # 基础版 APK
 ├── LICENSE                  # MIT License
 ├── README.md               # 项目文档
@@ -89,7 +90,7 @@ AI-app/
 
 ## 许可证
 
-本项目采用 [MIT License](LICENSE) 开源。
+本项目采用 MIT License 开源。
 
 ## 贡献
 
