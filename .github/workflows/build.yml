@@ -2,9 +2,9 @@
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [master, main]
   pull_request:
-    branches: [ main, master ]
+    branches: [master, main]
   release:
     types: [published]
 
@@ -44,14 +44,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
-    - name: Give permission to gradlew
-      run: chmod +x ./android/gradlew
-
-    - name: Build Debug APK
-      run: ./android/gradlew assembleDebug
+    - name: Build APK
+      run: ./gradlew assembleDebug
       working-directory: ./android
 
-    - name: Upload Debug APK
+    - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: ai-assistant-debug
@@ -59,7 +56,7 @@ jobs:
         retention-days: 7
 
   build-multiple:
-    name: Build Multiple APK Versions
+    name: Build Multiple Versions
     runs-on: ubuntu-latest
     needs: build
     
@@ -90,33 +87,13 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
-    - name: Configure app version
-      run: |
-        case "${{ matrix.version }}" in
-          deepseek)
-            sed -i 's/AI助手/AI助手-DeepSeek/g' android/app/src/main/res/values/strings.xml
-            ;;
-          openai)
-            sed -i 's/AI助手/AI助手-OpenAI/g' android/app/src/main/res/values/strings.xml
-            ;;
-          moonshot)
-            sed -i 's/AI助手/AI助手-Moonshot/g' android/app/src/main/res/values/strings.xml
-            ;;
-          zhipu)
-            sed -i 's/AI助手/AI助手-Zhipu/g' android/app/src/main/res/values/strings.xml
-            ;;
-        esac
-
-    - name: Give permission to gradlew
-      run: chmod +x ./android/gradlew
-
     - name: Build APK
-      run: ./android/gradlew assembleDebug
+      run: ./gradlew assembleDebug
       working-directory: ./android
 
     - name: Rename APK
       run: |
-        cp android/app/build/outputs/apk/debug/app-debug.apk \
+        mv android/app/build/outputs/apk/debug/app-debug.apk \
            android/app/build/outputs/apk/debug/ai-assistant-${{ matrix.version }}.apk
 
     - name: Upload APK
