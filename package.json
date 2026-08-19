@@ -1,7 +1,7 @@
 {
   "name": "ai-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "一个支持 OpenAI 兼容接口的 AI 对话应用，支持文本对话、图片生成、视频生成和图像识别功能。",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,13 @@
     "@capacitor/cli": "^8.5.0",
     "@capacitor/core": "^8.5.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tanle-mtr/ai-assistant.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tanle-mtr/ai-assistant/issues"
+  },
+  "homepage": "https://github.com/tanle-mtr/ai-assistant#readme"
 }

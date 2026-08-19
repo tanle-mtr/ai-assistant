@@ -1,4 +1,4 @@
-﻿// AI 对话助手 - 增强版
+// AI 对话助手 - 增强版
 const API_CONFIG = {
   key: \'\',
   baseUrl: \'https://api.deepseek.com/v1\'
