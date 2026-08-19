@@ -3,13 +3,16 @@ package com.ai.assistant;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import com.getcapacitor.BridgeActivity;
-import com.getcapacitor.Plugin;
-import java.util.ArrayList;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends BridgeActivity {
+public class MainActivity extends AppCompatActivity {
+    private WebView webView;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         // Set fullscreen
@@ -18,7 +21,29 @@ public class MainActivity extends BridgeActivity {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         
-        // Register your plugins here
-        this.plugins.add(new WebViewPlugin());
+        webView = new WebView(this);
+        setContentView(webView);
+        
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setAllowFileAccess(true);
+        webSettings.setAllowContentAccess(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setBuiltInZoomControls(false);
+        webSettings.setDisplayZoomControls(false);
+        
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl("file:///android_asset/www/index.html");
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
