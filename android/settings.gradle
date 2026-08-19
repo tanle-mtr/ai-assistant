@@ -1,4 +1,4 @@
-﻿rootProject.name = "AIAssistant"
+rootProject.name = "AIAssistant"
 include ':app'
 include ':capacitor-cordova-android-plugins'
 project(':capacitor-cordova-android-plugins').projectDir = new File('./capacitor-cordova-android-plugins/')

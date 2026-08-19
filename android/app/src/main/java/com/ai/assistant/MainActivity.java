@@ -1,4 +1,4 @@
-﻿package com.ai.assistant;
+package com.ai.assistant;
 
 import android.os.Bundle;
 import android.view.View;
